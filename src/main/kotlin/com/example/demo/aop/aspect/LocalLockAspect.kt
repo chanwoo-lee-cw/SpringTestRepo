@@ -28,13 +28,12 @@ class LocalLockAspect {
 //        val key = localLock.key
         val key = "${localLock.prefix}::${joinPoint.args[signature.parameterNames.indexOf(localLock.key)]}"
 
-        val lock = lockMap.computeIfAbsent(key) { ReentrantLock(
-            // True로 하면 FIFO 순서로 Request 처리하게 됨.
-        ) }
+        val lock = lockMap.computeIfAbsent(key) { ReentrantLock(true) } // 로 하면 FIFO 순서로 Request 처리하게 됨.
         try {
             logger.info { "${key} 로깅 시작" }
             val available = lock.tryLock(localLock.waitTime, localLock.timeOut)
             if(!available) {
+                logger.info { "${method}, key = ${key}, Fail : 잠금 시도 시간을 초과했습니다. " }
                 throw RuntimeException("잠금 시도 시간을 초과했습니다.")
             }
             logger.info { "${method} 시작, key = ${key}" }

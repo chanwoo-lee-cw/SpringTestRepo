@@ -1,10 +1,8 @@
 package com.example.demo.service
 
 import com.example.demo.aop.annotation.LocalLock
-import com.example.demo.dto.LocalLockDto
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
-import java.lang.Math.random
 
 
 val logger = KotlinLogging.logger {  }
@@ -16,8 +14,11 @@ class LocalLockService {
         prefix = "localLockFunction",
         key = "userName"
     )
-    fun localLockMethod(userName: String) {
-        Thread.sleep(random().toLong() * 300L + 100)
-        logger.info { "${userName} 프린트" }
+    fun localLockMethod(userName: String): Int {
+        logger.info { "Success :: 로컬 Lock 테스트 ${userName} Start" }
+//        Thread.sleep(random().toLong() * 300L + 100)
+        Thread.sleep(5000)
+        logger.info { "Success :: 로컬 Lock 테스트 ${userName} End" }
+        return 1
     }
 }

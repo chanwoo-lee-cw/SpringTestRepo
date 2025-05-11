@@ -16,7 +16,7 @@ class LockController(
 
     @GetMapping("/{userName}/local-lock")
     fun localLock(@PathVariable userName: String): Unit {
-        return localLockService.localLockMethod(
+        localLockService.localLockMethod(
             userName = userName
         )
     }
