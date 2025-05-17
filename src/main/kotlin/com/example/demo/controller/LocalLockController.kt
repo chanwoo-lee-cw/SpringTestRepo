@@ -1,6 +1,5 @@
 package com.example.demo.controller
 
-import com.example.demo.dto.LocalLockDto
 import com.example.demo.service.LocalLockService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -16,7 +15,7 @@ class LockController(
 
     @GetMapping("/{userName}/local-lock")
     fun localLock(@PathVariable userName: String): Unit {
-        localLockService.localLockMethod(
+        localLockService.waitJob(
             userName = userName
         )
     }

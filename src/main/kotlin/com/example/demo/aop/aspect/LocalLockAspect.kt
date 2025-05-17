@@ -1,6 +1,6 @@
 package com.example.demo.aop.aspect
 
-import com.example.demo.aop.annotation.LocalLock
+import com.example.demo.aop.annotation.UserLock
 import mu.KotlinLogging
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
@@ -23,10 +23,9 @@ class LocalLockAspect {
         // 이건 뭘까?
         val signature = joinPoint.signature as MethodSignature
         val method = signature.method
-        val localLock = method.getAnnotation(LocalLock::class.java) ?: throw RuntimeException("락이 없어요.")
+        val localLock = method.getAnnotation(UserLock::class.java) ?: throw RuntimeException("락이 없어요.")
 
-//        val key = localLock.key
-        val key = "${localLock.prefix}::${joinPoint.args[signature.parameterNames.indexOf(localLock.key)]}"
+        val key = "${localLock.lockType}::${joinPoint.args[signature.parameterNames.indexOf(localLock.key)]}"
 
         val lock = lockMap.computeIfAbsent(key) { ReentrantLock(true) } // 로 하면 FIFO 순서로 Request 처리하게 됨.
         try {

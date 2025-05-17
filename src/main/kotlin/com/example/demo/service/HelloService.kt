@@ -1,6 +1,5 @@
 package com.example.demo.service
 
-import com.example.demo.aop.annotation.LocalLock
 import com.example.demo.dto.HelloRequestDto
 import com.example.demo.dto.HelloResponseDto
 import org.springframework.stereotype.Service
