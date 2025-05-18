@@ -18,8 +18,8 @@ class LocalLockAspect {
 
     private val lockMap = ConcurrentHashMap<String, ReentrantLock>()
 
-    @Around("@annotation(com.example.demo.aop.annotation.LocalLock)")
-    fun localLock(joinPoint : ProceedingJoinPoint) {
+    @Around("@annotation(com.example.demo.aop.annotation.UserLock)")
+    fun localLock(joinPoint : ProceedingJoinPoint): Any {
         // 이건 뭘까?
         val signature = joinPoint.signature as MethodSignature
         val method = signature.method
@@ -36,8 +36,9 @@ class LocalLockAspect {
                 throw RuntimeException("잠금 시도 시간을 초과했습니다.")
             }
             logger.info { "${method} 시작, key = ${key}" }
-            joinPoint.proceed()
+            val result = joinPoint.proceed()
             logger.info { "${method} 완료, key = ${key}" }
+            return result
         } finally {
             lock.unlock()
             logger.info { "${key} unLock" }
