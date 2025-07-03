@@ -28,6 +28,11 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-aop")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 
+	// Redis
+	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+	implementation("org.redisson:redisson-spring-boot-starter")
+	implementation("io.lettuce.core:lettuce-core")
+
 	// Logging
 	implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
 

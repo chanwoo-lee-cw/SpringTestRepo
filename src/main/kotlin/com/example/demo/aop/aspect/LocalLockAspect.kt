@@ -20,7 +20,6 @@ class LocalLockAspect {
 
     @Around("@annotation(com.example.demo.aop.annotation.UserLock)")
     fun localLock(joinPoint : ProceedingJoinPoint): Any {
-        // 이건 뭘까?
         val signature = joinPoint.signature as MethodSignature
         val method = signature.method
         val localLock = method.getAnnotation(UserLock::class.java) ?: throw RuntimeException("락이 없어요.")
