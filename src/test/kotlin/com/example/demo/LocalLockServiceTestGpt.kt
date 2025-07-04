@@ -1,6 +1,6 @@
 import com.example.demo.aop.annotation.LockType
-import com.example.demo.aop.annotation.UserLock
-import com.example.demo.aop.aspect.LocalLockAspect
+import com.example.demo.aop.annotation.UserLocalLock
+import com.example.demo.aop.aspect.DistributedLockAspect
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.reflect.MethodSignature
 import org.mockito.Mockito.mock
@@ -17,7 +17,7 @@ import kotlin.test.assertTrue
 
 class LocalLockAspectTest {
 
-    private val aspect = LocalLockAspect()
+    private val aspect = DistributedLockAspect()
 
 
     @Test
@@ -112,10 +112,10 @@ class LocalLockAspectTest {
     }
 
     class TestService {
-        @UserLock(lockType = LockType.WaitLock, key = "userName", waitTime = 1)
+        @UserLocalLock(lockType = LockType.WaitLock, key = "userName", waitTime = 1)
         fun mockedMethod(userName: String): Int = 42
 
-        @UserLock(lockType = LockType.WaitLock, key = "userName", waitTime = 1)
+        @UserLocalLock(lockType = LockType.WaitLock, key = "userName", waitTime = 1)
         fun longRunningMethod(userName: String): Int = 42
     }
 }

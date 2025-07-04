@@ -1,7 +1,8 @@
 package com.example.demo.service
 
 import com.example.demo.aop.annotation.LockType
-import com.example.demo.aop.annotation.UserLock
+import com.example.demo.aop.annotation.UserDistributedLock
+import com.example.demo.aop.annotation.UserLocalLock
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
 
@@ -11,7 +12,7 @@ val logger = KotlinLogging.logger {  }
 @Service
 class LocalLockService {
 
-    @UserLock(
+    @UserLocalLock(
         lockType = LockType.WaitLock,
         key = "userName"
     )
@@ -24,7 +25,7 @@ class LocalLockService {
     }
 
 
-    @UserLock(
+    @UserLocalLock(
         lockType = LockType.ThrowError,
         key = "userName"
     )

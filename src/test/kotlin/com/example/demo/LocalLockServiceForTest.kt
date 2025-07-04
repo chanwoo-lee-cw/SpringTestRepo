@@ -1,7 +1,7 @@
 package com.example.demo
 
 import com.example.demo.aop.annotation.LockType
-import com.example.demo.aop.annotation.UserLock
+import com.example.demo.aop.annotation.UserLocalLock
 import com.example.demo.service.logger
 import org.springframework.stereotype.Service
 import java.util.Random
@@ -10,7 +10,7 @@ import java.util.Random
 class LocalLockServiceForTest {
 
 
-    @UserLock(
+    @UserLocalLock(
         lockType = LockType.WaitLock,
         key = "userName",
         waitTime = 3,
@@ -22,7 +22,7 @@ class LocalLockServiceForTest {
         return 1
     }
 
-    @UserLock(
+    @UserLocalLock(
         lockType = LockType.WaitLock,
         key = "userName",
         waitTime = 6,
@@ -34,7 +34,7 @@ class LocalLockServiceForTest {
         return 1
     }
 
-    @UserLock(
+    @UserLocalLock(
         lockType = LockType.WaitLock,
         key = "userName",
         waitTime = 10,

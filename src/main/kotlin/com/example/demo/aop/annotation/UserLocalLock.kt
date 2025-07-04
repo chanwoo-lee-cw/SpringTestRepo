@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class UserLock(
+annotation class UserLocalLock(
     val lockType: LockType,
     val key: String,
     val timeOut: TimeUnit = TimeUnit.SECONDS,

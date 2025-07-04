@@ -30,8 +30,8 @@ dependencies {
 
 	// Redis
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
-	implementation("org.redisson:redisson-spring-boot-starter")
-	implementation("io.lettuce.core:lettuce-core")
+	implementation("org.redisson:redisson-spring-boot-starter:3.41.0")
+	implementation("io.lettuce:lettuce-core:6.7.1.RELEASE")
 
 	// Logging
 	implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
