@@ -15,8 +15,15 @@ import org.springframework.web.bind.annotation.RestController
 class HelloTestApi(
     val helloService: HelloService
 ) {
+
     @GetMapping()
-    fun categorySales(@RequestBody request: HelloRequestDto): HelloResponseDto {
+    fun helloWorld(): HelloResponseDto {
+        return HelloResponseDto("success")
+    }
+
+
+    @GetMapping("/print-person")
+    fun PrintPerson(@RequestBody request: HelloRequestDto): HelloResponseDto {
         return helloService.printPersonName(request)
     }
 
