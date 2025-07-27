@@ -3,7 +3,6 @@ package com.example.demo.controller
 import com.example.demo.dto.HelloRequestDto
 import com.example.demo.dto.HelloResponseDto
 import com.example.demo.service.HelloService
-import org.springdoc.core.annotations.ParameterObject
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping

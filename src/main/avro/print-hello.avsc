@@ -1,0 +1,20 @@
+{
+  "type": "record",
+  "name": "PrintHelloVo",
+  "namespace": "com.example.avro.schema",
+  "doc": "HelloWorld 테스트",
+  "fields": [
+    {
+      "name": "sender",
+      "type": "string"
+    },
+    {
+      "name": "publishDateTime",
+      "type": "string"
+    },
+    {
+      "name": "printMessage",
+      "type": "string"
+    }
+  ]
+}

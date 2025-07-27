@@ -16,14 +16,14 @@ class OnceTestRequestFilter: OncePerRequestFilter() {
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        log.info { "this is OnceTestRequestFilter Start" }
+//        log.info { "this is OnceTestRequestFilter Start" }
         filterChain.doFilter(request, response)
-        log.info { "this is OnceTestRequestFilter end" }
+//        log.info { "this is OnceTestRequestFilter end" }
     }
 
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
         // 아무것도 작성하지 않는다면 기본 값이 False이다
-        log.info { "this is shouldNotFilter Start" }
+//        log.info { "this is shouldNotFilter Start" }
         return false
     }
 }

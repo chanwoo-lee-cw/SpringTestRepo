@@ -14,7 +14,7 @@ class TestFilter() : Filter {
     private val log = KotlinLogging.logger {}
 
     override fun init(filterConfig: FilterConfig?) {
-        log.info { "Filter init" }
+//        log.info { "Filter init" }
         super.init(filterConfig)
     }
 
@@ -23,13 +23,13 @@ class TestFilter() : Filter {
         response: ServletResponse,
         filterChain: FilterChain,
     ) {
-        log.info { "doFilter start" }
+//        log.info { "doFilter start" }
         filterChain.doFilter(request, response)
-        log.info { "doFilter end" }
+//        log.info { "doFilter end" }
     }
 
     override fun destroy() {
-        log.info { "Filter Destroy" }
+//        log.info { "Filter Destroy" }
         super.destroy()
     }
 

@@ -2,13 +2,14 @@ package com.example.demo
 
 import com.example.demo.aop.annotation.LockType
 import com.example.demo.aop.annotation.UserLocalLock
-import com.example.demo.service.logger
+import mu.KotlinLogging
 import org.springframework.stereotype.Service
 import java.util.Random
 
 @Service
 class LocalLockServiceForTest {
 
+    val logger = KotlinLogging.logger { }
 
     @UserLocalLock(
         lockType = LockType.WaitLock,

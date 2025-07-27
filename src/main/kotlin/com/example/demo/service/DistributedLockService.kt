@@ -13,9 +13,9 @@ class DistributedLockService {
         key = "userName"
     )
     fun distributedLockWaitJob(userName: String): Int {
-        logger.info { "Success :: 분산락 Lock 테스트 ${userName} Start" }
+//        logger.info { "Success :: 분산락 Lock 테스트 ${userName} Start" }
         Thread.sleep(5000)
-        logger.info { "Success :: 분산락 Lock 테스트 ${userName} End" }
+//        logger.info { "Success :: 분산락 Lock 테스트 ${userName} End" }
         return 1
     }
 }

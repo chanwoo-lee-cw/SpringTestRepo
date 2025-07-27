@@ -18,7 +18,7 @@ class TestInterceptor : HandlerInterceptor {
         response: HttpServletResponse,
         handler: Any
     ): Boolean {
-        log.info { "is preHandle!!!" }
+//        log.info { "is preHandle!!!" }
         return true
     }
 
@@ -28,7 +28,7 @@ class TestInterceptor : HandlerInterceptor {
         handler: Any,
         @Nullable modelAndView: ModelAndView?
     ) {
-        log.info { "is postHandle!!!" }
+//        log.info { "is postHandle!!!" }
     }
 
     override fun afterCompletion(
@@ -37,7 +37,7 @@ class TestInterceptor : HandlerInterceptor {
         handler: Any,
         @Nullable ex: Exception?
     ) {
-        log.info { "is afterCompletion!!!" }
+//        log.info { "is afterCompletion!!!" }
     }
 
 }
