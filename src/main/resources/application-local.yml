@@ -7,6 +7,19 @@ spring:
       host: localhost
       port: 6379
 
+  kafka:
+    producer:
+      bootstrap-servers: http://localhost:9092
+      acks: 1
+      retries: 3
+    properties:
+      schema-registry-url: http://localhost:8081
+
+
+application:
+  kafka-topic:
+    print-hello: local-print-hello
+
 logging:
   level:
     com.bs: DEBUG

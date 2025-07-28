@@ -1,5 +1,6 @@
 package com.example.demo.controller
 
+import com.example.demo.aop.annotation.MeasureRuntime
 import com.example.demo.dto.HelloRequestDto
 import com.example.demo.dto.HelloResponseDto
 import com.example.demo.service.HelloService
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/v1")
-class HelloTestApi(
+class HelloTestController(
     val helloService: HelloService
 ) {
 
@@ -24,6 +25,12 @@ class HelloTestApi(
     @GetMapping("/print-person")
     fun PrintPerson(@RequestBody request: HelloRequestDto): HelloResponseDto {
         return helloService.printPersonName(request)
+    }
+
+    @MeasureRuntime
+    @GetMapping("/print-hello-by-kafka")
+    fun printHello(): Unit {
+        return helloService.printHelloKafka()
     }
 
 }
