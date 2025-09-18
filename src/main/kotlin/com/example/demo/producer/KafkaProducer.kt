@@ -17,7 +17,8 @@ class KafkaProducer(
     fun send(message: Message<*>) {
         val future = kafkaTemplate.send(message)
         try {
-            future.get()
+            val response = future.get()
+            log.info { "[KafkaProducer.send] topic - ${response.recordMetadata.topic()} :: partition - ${response.recordMetadata.partition()}, offset - ${response.recordMetadata.offset()}" }
         } catch (e: Exception) {
             log.error { "[KafkaProducer.send] ${e} :: header - ${message.headers}, body - ${message.payload}" }
         }
