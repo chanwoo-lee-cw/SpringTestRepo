@@ -30,7 +30,7 @@ class CircuitBreakerConfiguration(
             .waitDurationInOpenState(Duration.ofMillis(circuitBreakerProperty.waitDurationInOpenState))
             .minimumNumberOfCalls(circuitBreakerProperty.minimumNumberOfCalls)
             .slidingWindowSize(circuitBreakerProperty.slidingWindowSize)
-            .ignoreExceptions(Exception::class.java)   // 화이트리스트로 서킷 오픈 기준 관리
+            .ignoreExceptions(RuntimeException::class.java)   // 화이트리스트로 서킷 오픈 기준 관리
             .permittedNumberOfCallsInHalfOpenState(circuitBreakerProperty.permittedNumberOfCallsInHalfOpenState)
             .build()
     }

@@ -1,7 +1,7 @@
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: test
   data:
     redis:
       host: localhost
@@ -10,7 +10,7 @@ spring:
   kafka:
     producer:
       bootstrap-servers: http://localhost:9092
-      acks: "1"
+      acks: 1
       retries: 3
     properties:
       schema-registry-url: http://localhost:8081

@@ -12,7 +12,7 @@ group = "com.example"
 version = "0.0.1-SNAPSHOT"
 val avroVersion = "1.11.4"
 val avroSerializer = "7.7.0"
-val resilience4jVersion = "2.2.1"
+val resilience4jVersion = "2.2.0"
 
 java {
 	toolchain {
@@ -42,8 +42,10 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 
 	// resilience4j
-	implementation("io.github.resilience4j:resilience4j-spring-boot3:${resilience4jVersion}")
 	implementation("io.github.resilience4j:resilience4j-circuitbreaker:${resilience4jVersion}")
+	implementation("io.github.resilience4j:resilience4j-annotations:${resilience4jVersion}")
+	implementation("io.github.resilience4j:resilience4j-spring-boot3:${resilience4jVersion}")
+	implementation("io.github.resilience4j:resilience4j-spring6:${resilience4jVersion}")
 	implementation("io.github.resilience4j:resilience4j-kotlin:${resilience4jVersion}")
 
 	// Redis

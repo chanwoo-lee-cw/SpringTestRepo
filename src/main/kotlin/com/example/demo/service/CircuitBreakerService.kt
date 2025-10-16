@@ -1,21 +1,34 @@
 package com.example.demo.service
 
 import com.example.demo.common.config.circuitBreaker.CircuitBreakerConfiguration
-
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker
+import mu.KotlinLogging
 import org.springframework.stereotype.Service
-//import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker
-//import io.github.resilience4j.retry.annotation.Retry
-//import io.github.resilience4j.timelimiter.annotation.TimeLimiter
-//import org.springframework.stereotype.Service
-//import org.springframework.web.client.RestClient
-//import java.util.concurrent.CompletableFuture
 
 @Service
 class CircuitBreakerService {
 
-//    @CircuitBreaker(name = CircuitBreakerConfiguration.CB_REDIS)
-//    fun find(storeId: String, productId: String): Stock {
-//        return redisManager.findByKey(StockKey(storeId, productId))   // REDIS 조회
-//    }
+    private val logger = KotlinLogging.logger {}
+
+    @CircuitBreaker(name = CircuitBreakerConfiguration.CB_REDIS, fallbackMethod = "cbTestFallbackMethod")
+    fun circuitBreakerTest(value: Boolean): Boolean {
+        return when (value) {
+            true -> true
+            false -> throw RuntimeException("에러 발생")
+        }
+    }
+
+
+    fun cbTestFallbackMethod(
+        value: Boolean,
+        ex: RuntimeException
+    ): Boolean {
+
+        logger.info("${ex.message} 서킷 브레이커 작동")
+        return when (value) {
+            true -> true
+            false -> false
+        }
+    }
 
 }
