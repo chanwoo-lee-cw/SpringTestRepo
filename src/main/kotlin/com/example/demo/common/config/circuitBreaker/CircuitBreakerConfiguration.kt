@@ -13,7 +13,8 @@ class CircuitBreakerConfiguration(
 ) {
 
     companion object {
-        const val CB_REDIS: String = "CB_REDIS"
+        // 관리할 서킷 브레이커 이름
+        const val CB_TEST: String = "CB_TEST"
     }
 
     @Bean
@@ -21,6 +22,9 @@ class CircuitBreakerConfiguration(
         return CircuitBreakerRegistry.ofDefaults()
     }
 
+    /**
+     * 기본 서킷 브레이커 설정
+     */
     @Bean
     fun circuitBreakerConfig(): CircuitBreakerConfig {
         return CircuitBreakerConfig.custom()
@@ -30,16 +34,29 @@ class CircuitBreakerConfiguration(
             .waitDurationInOpenState(Duration.ofMillis(circuitBreakerProperty.waitDurationInOpenState))
             .minimumNumberOfCalls(circuitBreakerProperty.minimumNumberOfCalls)
             .slidingWindowSize(circuitBreakerProperty.slidingWindowSize)
-            .ignoreExceptions(RuntimeException::class.java)   // 화이트리스트로 서킷 오픈 기준 관리
+//            .ignoreExceptions(RuntimeException::class.java)   // 화이트리스트로 서킷 오픈 기준 관리
             .permittedNumberOfCallsInHalfOpenState(circuitBreakerProperty.permittedNumberOfCallsInHalfOpenState)
             .build()
     }
 
+
+    /**
+     * 서킷 브레이커 테스트 전용으로 사용할 서킷 브레이커
+     */
     @Bean
-    fun redisCircuitBreaker(circuitBreakerRegistry: CircuitBreakerRegistry): CircuitBreaker {
+    fun testCircuitBreaker(
+        circuitBreakerRegistry: CircuitBreakerRegistry
+    ): CircuitBreaker {
+        val defaultCircuitBreakerConfig = circuitBreakerConfig()
         return circuitBreakerRegistry.circuitBreaker(
-            CB_REDIS,
-            circuitBreakerConfig()
+            CB_TEST,
+            CircuitBreakerConfig
+                .from(defaultCircuitBreakerConfig)
+                .apply {
+                    CircuitBreakerConfig.custom()
+                        .failureRateThreshold(circuitBreakerProperty.failureRateThreshold)
+                }
+                .build()
         )
     }
 }

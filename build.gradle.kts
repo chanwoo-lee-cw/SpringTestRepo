@@ -12,7 +12,7 @@ group = "com.example"
 version = "0.0.1-SNAPSHOT"
 val avroVersion = "1.11.4"
 val avroSerializer = "7.7.0"
-val resilience4jVersion = "2.2.0"
+val resilience4j = "2.2.0"
 
 java {
 	toolchain {
@@ -42,11 +42,22 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 
 	// resilience4j
-	implementation("io.github.resilience4j:resilience4j-circuitbreaker:${resilience4jVersion}")
-	implementation("io.github.resilience4j:resilience4j-annotations:${resilience4jVersion}")
-	implementation("io.github.resilience4j:resilience4j-spring-boot3:${resilience4jVersion}")
-	implementation("io.github.resilience4j:resilience4j-spring6:${resilience4jVersion}")
-	implementation("io.github.resilience4j:resilience4j-kotlin:${resilience4jVersion}")
+	// 1. CircuitBreaker : 기본 기능
+	implementation("io.github.resilience4j:resilience4j-circuitbreaker:${resilience4j}")
+	// 2. @CircuitBreaker, @Retry 등 애노테이션 제공 (메서드 단위 적용 시 필요)
+	implementation("io.github.resilience4j:resilience4j-annotations:${resilience4j}")
+	// 3) Spring Boot 3 : 자동 구성(AutoConfig) + AOP 어드바이스 연동 + 프로퍼티 바인딩 + application.yml 설정
+	implementation("io.github.resilience4j:resilience4j-spring-boot3:${resilience4j}")
+	// 4. Retry : 요청 실패 시 재시도 처리 기능
+	implementation("io.github.resilience4j:resilience4j-retry:${resilience4j}")
+	// 5. RateLimiter : 제한치를 넘어서 요청을 거부하거나 Queue 생성하여 처리하는 기능
+	implementation("io.github.resilience4j:resilience4j-ratelimiter:${resilience4j}")
+	// 6. TimeLimiter : 실행 시간제한 설정 기능
+	implementation("io.github.resilience4j:resilience4j-timelimiter:${resilience4j}")
+	// 7. Bulkhead : 동시 실행 횟수 제한 기능
+	implementation("io.github.resilience4j:resilience4j-bulkhead:${resilience4j}")
+	// 8. Cache : 결과 캐싱 기능
+	implementation("io.github.resilience4j:resilience4j-cache:${resilience4j}")
 
 	// Redis
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
